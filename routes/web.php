@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\AnasayfaController;
+use App\Http\Controllers\UrunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/',[AnasayfaController::class,'index'])->name('anasayfa');
+Route::get('/kategori/{slug_kategoriadi}',[KategoriController::class,'index'])->name('kategori');
+Route::get('/urun/{slug_urunadi}',[UrunController::class,'index'])->name('urun');
