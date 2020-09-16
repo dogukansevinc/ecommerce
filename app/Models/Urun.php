@@ -10,4 +10,14 @@ class Urun extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function kategoriler()
+    {
+       return $this->belongsToMany(Kategori::class,'urunkats');
+    }
+
+    public function detay()
+    {
+        return $this->hasOne(Urundetay::class);
+    }
 }

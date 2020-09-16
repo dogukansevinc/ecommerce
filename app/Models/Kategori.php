@@ -10,4 +10,8 @@ class Kategori extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function urunler(){
+        return $this->belongsToMany(Urun::class,'urunkats');
+    }
 }
