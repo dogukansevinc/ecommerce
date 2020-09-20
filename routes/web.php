@@ -24,7 +24,14 @@ use App\Http\Controllers\KullaniciController;
 Route::get('/',[AnasayfaController::class,'index'])->name('anasayfa');
 Route::get('/kategori/{slug_kategoriadi}',[KategoriController::class,'index'])->name('kategori');
 Route::get('/urun/{slug_urunadi}',[UrunController::class,'index'])->name('urun');
-Route::get('/sepet',[SepetController::class,'index'])->name('sepet')->middleware('auth');
+
+Route::prefix('sepet')->group(function (){
+    Route::get('/',[SepetController::class,'index'])->name('sepet')->middleware('auth');
+    Route::post('ekle',[SepetController::class,'ekle'])->name('sepet.ekle')->middleware('auth');
+    Route::delete('kaldir/{rowId}',[SepetController::class,'kaldir'])->name('sepet.kaldir')->middleware('auth');
+    Route::delete('bosalt',[SepetController::class,'bosalt'])->name('sepet.bosalt')->middleware('auth');
+    Route::patch('/guncelle/{rowid}',[SepetController::class,'guncelle'])->name('sepet.guncelle')->middleware('auth');
+});
 
 Route::group(['middleware'=>'auth'],function (){
     Route::get('/odeme',[OdemeController::class,'index'])->name('odeme');

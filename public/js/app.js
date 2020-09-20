@@ -37266,6 +37266,26 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+$('.urun-adet-arttir, .urun-adet-azalt').on('click', function () {
+  var id = $(this).attr('data-id');
+  var adet = $(this).attr('data-adet');
+  $.ajax({
+    type: 'PATCH',
+    url: '/sepet/guncelle/' + id,
+    data: {
+      adet: adet
+    },
+    success: function success() {
+      window.location.href = '/sepet';
+    }
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
